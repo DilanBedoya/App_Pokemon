@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pokémon List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Barra de búsqueda -->
+  <ion-searchbar [(ngModel)]="searchText" (ionInput)="filterPokemons()"></ion-searchbar>
+
+  <!-- Lista de Pokémon -->
+  <ion-list>
+    <ion-item *ngFor="let pokemon of filteredPokemons">
+      <ion-thumbnail slot="start">
+        <img [src]="pokemon.imageUrl" />
+      </ion-thumbnail>
+      <ion-label>
+        {{ pokemon.name}}
+        <ion-button (click)="showPokemonDetails(pokemon)" color="dark">
+          Detalles
+        </ion-button>
+
+      </ion-label>
+      <a href="{{pokemon.url}}">{{pokemon.url}}</a>
+    </ion-item>
+  </ion-list>
+
+  <!-- Spinner de carga -->
+  <ion-spinner *ngIf="loading" class="loading-spinner"></ion-spinner>
+</ion-content>
